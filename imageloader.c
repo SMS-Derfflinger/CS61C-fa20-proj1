@@ -20,6 +20,27 @@
 #include <string.h>
 #include "imageloader.h"
 
+Image *createNewImage(int rows, int cols) {
+    Image *newImage = (Image *)malloc(sizeof(Image));
+    newImage->cols = cols;
+    newImage->rows = rows;
+    newImage->image = (Color **)calloc(rows, sizeof(Color *));
+    if (newImage->image == NULL){
+		perror("Error allocating.");
+		return NULL;
+	}
+
+    for (int i = 0; i < rows; ++i){
+		newImage->image[i] = (Color*)calloc(newImage->cols, sizeof(Color));
+		if (newImage->image[i] == NULL){
+			perror("Error allocating.");
+            return NULL;
+		}
+	}
+
+    return newImage;
+}
+
 //Opens a .ppm P3 image file, and constructs an Image object. 
 //You may find the function fscanf useful.
 //Make sure that you close the file with fclose before returning.
@@ -52,24 +73,11 @@ Image *readData(char *filename)
         return NULL;
     }
 
-    Image *newImage = (Image *)malloc(sizeof(Image));
-    newImage->cols = cols;
-    newImage->rows = rows;
-    newImage->image = (Color **)calloc(rows, sizeof(Color *));
-    if (newImage->image == NULL){
-		perror("Error allocating.");
+    Image *newImage = createNewImage(rows, cols);
+    if (newImage == NULL) {
         fclose(file);
-		return NULL;
-	}
-
-    for (int i = 0; i < rows; ++i){
-		newImage->image[i] = (Color*)calloc(newImage->cols, sizeof(Color));
-		if (newImage->image[i] == NULL){
-			perror("Error allocating.");
-            fclose(file);
-            return NULL;
-		}
-	}
+        return NULL;
+    }
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {

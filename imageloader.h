@@ -23,3 +23,6 @@ extern void writeData(Image *image);
 
 //Frees an image and all its associated data
 extern void freeImage(Image *image);
+
+//Allocate memory to a new Image
+extern Image *createNewImage(int rows, int cols);
