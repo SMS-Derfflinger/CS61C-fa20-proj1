@@ -26,7 +26,7 @@
 Image *readData(char *filename) 
 {
 	//YOUR CODE HERE
-    FILE *file = fopen("example.txt", "r");
+    FILE *file = fopen(filename, "r");
     if (file == NULL) {
         perror("Error opening file.");
         return NULL;
