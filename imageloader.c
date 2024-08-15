@@ -22,6 +22,11 @@
 
 Image *createNewImage(int rows, int cols) {
     Image *newImage = (Image *)malloc(sizeof(Image));
+    if (newImage == NULL){
+		perror("Error allocating.");
+		return NULL;
+	}
+    
     newImage->cols = cols;
     newImage->rows = rows;
     newImage->image = (Color **)calloc(rows, sizeof(Color *));
