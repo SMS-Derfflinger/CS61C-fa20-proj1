@@ -41,6 +41,20 @@ Color *evaluateOnePixel(Image *image, int row, int col)
 Image *steganography(Image *image)
 {
 	//YOUR CODE HERE
+    Image *newImage = createNewImage(image->rows, image->cols);
+    if (newImage == NULL) {
+        return NULL;
+    }
+
+    for (int i = 0; i < image->rows; i++) {
+        for (int j = 0; j < image->cols; j++) {
+            Color *temp = evaluateOnePixel(image, i, j);
+            newImage->image[i][j] = *temp;
+            free(temp);
+        }
+    }
+
+    return newImage;
 }
 
 /*
