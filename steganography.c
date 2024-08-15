@@ -73,4 +73,15 @@ Make sure to free all memory before returning!
 int main(int argc, char **argv)
 {
 	//YOUR CODE HERE
+    Image *image = readData(argv[1]);
+    if (image == NULL) {
+        return -1;
+    }
+
+    Image *newImage = steganography(image);
+    writeData(newImage);
+    freeImage(image);
+    freeImage(newImage);
+
+    return 0;
 }
