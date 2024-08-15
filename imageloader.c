@@ -99,4 +99,9 @@ void writeData(Image *image)
 void freeImage(Image *image)
 {
 	//YOUR CODE HERE
+    for (int i = 0; i < image->rows; i++) {
+        free(image->image[i]);
+    }
+    free(image->image);
+    free(image);
 }
