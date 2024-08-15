@@ -84,6 +84,15 @@ Image *readData(char *filename)
 void writeData(Image *image)
 {
 	//YOUR CODE HERE
+    printf("P3\n%d %d\n255\n", image->cols, image->rows);
+
+    for (int i = 0; i < image->rows; i++) {
+        int j;
+        for (j = 0; j < image->cols - 1; j++) {
+            printf("%3hhu %3hhu %3hhu   ", image->image[i][j].R, image->image[i][j].G, image->image[i][j].B);
+        }
+        printf("%3hhu %3hhu %3hhu\n", image->image[i][j].R, image->image[i][j].G, image->image[i][j].B);
+    }
 }
 
 //Frees an image
